@@ -6,8 +6,21 @@ import (
 	"os"
 )
 
-var Log logrus.Logger
+var Log *logrus.Logger
 
 func InitLogger(cfg *config.ServerConf) {
-	Log.SetOutput(os.Stdout)
+	level, err := logrus.ParseLevel(cfg.Log.Level)
+	if err != nil {
+		panic(err)
+	}
+	formatter, err := parseLofFormatter(cfg.Format)
+	if err != nil {
+		panic(err)
+	}
+
+	Log = &logrus.Logger{
+		Out:       os.Stderr,
+		Formatter: formatter,
+		Level:     level,
+	}
 }

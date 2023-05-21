@@ -21,6 +21,7 @@ func NewApp() *App {
 func (a *App) PrepareRun() *App {
 	// 初始化服务
 	s, err := createServer(&a.config)
+
 	if err != nil {
 		panic(err)
 	}

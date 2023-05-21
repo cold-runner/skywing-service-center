@@ -6,6 +6,5 @@ import (
 
 func main() {
 	app := internal.NewApp()
-
 	app.PrepareRun().Run()
 }
